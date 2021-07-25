@@ -48,9 +48,13 @@ def gamble(bet):
     else:
         print("You can not bet more than you own, your current balance is", r)
 
+def total():
+    global money
+
+    print("You have", str(money), "amount of money.")
 
 while True:
-    task = int(input("Enter number correspinding to the preferred task\n1. New user\n2. Change user\n3. Gamble money\n====================>  "))
+    task = int(input("Enter number correspinding to the preferred task\n1. New user\n2. Change user\n3. Gamble money\n4. Show my total money\n5. Exit\n=========================>  "))
 
     if task == 1:
         new()
@@ -58,7 +62,15 @@ while True:
     elif task == 2:
         user()
         continue
-    else:
+    elif task == 3:
         bet = int(input("Enter amount to be betted  "))
         gamble(bet)
+        continue
+    elif task == 4:
+        total()
+        continue
+    elif task == 5:
+        break
+    else:
+        print("Invalid input!")
         continue
