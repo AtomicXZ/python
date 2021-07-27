@@ -46,7 +46,7 @@ def gamble(bet):
             money -= bet
             print(player, "betted", bet, "and lost", bet)
     else:
-        print("You can not bet more than you own, your current balance is", r)
+        print("You can not bet more than you own, your current balance is", money)
 
 def total():
     global money
