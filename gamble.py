@@ -61,7 +61,7 @@ def total():
 
 
 while True:
-    task = int(input("Enter number corresponding to the preferred task\n1. New user\n2. Change user\n3. Gamble money\n4. Show my total money\n5. Exit\n=========================>  "))
+    task = int(input("Enter number corresponding to the preferred task\n1. New user\n2. Change user\n3. Gamble money\n4. Show my total money\n5. Check users / amount\n6. Exit\n=========================>  "))
 
     if task == 1:
         new()
@@ -77,6 +77,10 @@ while True:
         total()
         continue
     elif task == 5:
+        for i in range(0, len(id)):
+            print("ID -", id[i], " & Amount -", amount[i] )
+        continue
+    elif task == 6:
         break
     else:
         print("Invalid input!")
