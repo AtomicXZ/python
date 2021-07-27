@@ -1,4 +1,6 @@
+# Import required python libraries
 import random
+import time
 
 # Global lists
 chances = [True, False, False, True, False, False, False, True, False, False]
@@ -51,7 +53,16 @@ def gamble(bet):
     else:
         print("You can not bet more than you own, your current balance is", money)
         print("===============================================================================================")
-
+    
+    if money == 0:
+        print("You have no money left, hence you will be executed in")
+        for i in range(3,0,-1):
+            print(i)
+            time.sleep(1)
+        target = id.index(player)
+        id.pop(target)
+        amount.pop(target)
+        print("*POP* Execution complete.")
 
 def total():
     global money
