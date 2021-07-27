@@ -32,9 +32,11 @@ def user():
     global money
 
     player = int(input("Enter your user id:  "))
-    position = id.index(player)
-    money = amount[position]
-
+    if player in id:
+        position = id.index(player)
+        money = amount[position]
+    else:
+        print("Player ID doesn't exist")
 
 def gamble(bet):
     global player
