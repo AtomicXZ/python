@@ -15,6 +15,14 @@ def new():
         amount.append(int(10000))
         print("Your assigned id is", i, "and you have been granted 10k as beginners' bonus")
 
+    # Automatically set player and money
+    global player
+    global money
+
+    player = i
+    position = id.index(player)
+    money = amount[position]
+
 
 def user():
     global player
