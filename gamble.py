@@ -1,7 +1,7 @@
 import random
 
 # Global lists
-chances = [True, True, True, False, False, False, False, False, False, False]
+chances = [True, False, False, True, False, False, False, True, False, False]
 id = []
 amount = []
 
@@ -14,6 +14,7 @@ def new():
         id.append(i)
         amount.append(int(10000))
         print("Your assigned id is", i, "and you have been granted 10k as beginners' bonus")
+        print("===============================================================================================")
 
     # Automatically set player and money
     global player
@@ -42,19 +43,25 @@ def gamble(bet):
         if chances[x] == True:
             money += bet
             print(player, "betted", bet, "and brought back", 2*bet)
+            print("===============================================================================================")
         else:
             money -= bet
             print(player, "betted", bet, "and lost", bet)
+            print("===============================================================================================")
     else:
         print("You can not bet more than you own, your current balance is", money)
+        print("===============================================================================================")
+
 
 def total():
     global money
 
     print("You have", str(money), "amount of money.")
+    print("===============================================================================================")
+
 
 while True:
-    task = int(input("Enter number correspinding to the preferred task\n1. New user\n2. Change user\n3. Gamble money\n4. Show my total money\n5. Exit\n=========================>  "))
+    task = int(input("Enter number corresponding to the preferred task\n1. New user\n2. Change user\n3. Gamble money\n4. Show my total money\n5. Exit\n=========================>  "))
 
     if task == 1:
         new()
