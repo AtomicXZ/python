@@ -78,23 +78,17 @@ while True:
 
     if task == 1:
         new()
-        continue
     elif task == 2:
         user()
-        continue
     elif task == 3:
         bet = int(input("Enter amount to be betted  "))
         gamble(bet)
-        continue
     elif task == 4:
         total()
-        continue
     elif task == 5:
         for i in range(0, len(id)):
             print("ID -", id[i], " & Amount -", amount[i] )
-        continue
     elif task == 6:
         break
     else:
         print("Invalid input!")
-        continue
