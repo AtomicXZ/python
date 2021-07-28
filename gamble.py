@@ -1,42 +1,58 @@
 # Import required python libraries
 import random
 import time
+import mysql.connector as sql
+
+# Setup SQL
+db = sql.connect(
+    host = "localhost",
+    user = "root",
+    passwd = "qwerty123",
+)
+
+cursor = db.cursor()
+
+cursor.execute("CREATE DATABASE IF NOT EXISTS python")
+cursor.execute("USE python")
+cursor.execute("CREATE TABLE IF NOT EXISTS gamble (ID INT(3) PRIMARY KEY NOT NULL, amount BIGINT(255))")
 
 # Global lists
 chances = [True, False, False, True, False, False, False, True, False, False]
-id = []
-amount = []
 
 def new():
     i = random.randint(1,100)
+    cursor.execute("SELECT * FROM gamble WHERE ID = %s", (i,))
+    record = cursor.fetchall()
 
-    if i in id:
-        new()
-    else:
-        id.append(i)
-        amount.append(int(10000))
+    if not record:
+        cursor.execute("INSERT INTO gamble VALUES (%s, 10000)", (i,))
         print("Your assigned id is", i, "and you have been granted 10k as beginners' bonus")
         print("===============================================================================================")
+    else:
+        new()
 
     # Automatically set player and money
     global player
     global money
 
     player = i
-    position = id.index(player)
-    money = amount[position]
-
+    cursor.execute("SELECT amount FROM gamble WHERE ID = %s", (player,))
+    money = int(cursor.fetchone()[0])
 
 def user():
     global player
     global money
 
     player = int(input("Enter your user id:  "))
-    if player in id:
-        position = id.index(player)
-        money = amount[position]
+    cursor.execute("SELECT * FROM gamble WHERE ID = %s", (player,))
+    record = cursor.fetchall()
+
+    if record:
+        cursor.execute("SELECT amount FROM gamble WHERE ID = %s", (player,))
+        money = int(cursor.fetchone()[0])
     else:
         print("Player ID doesn't exist")
+        print("===============================================================================================")
 
 def gamble(bet):
     global player
@@ -48,14 +64,12 @@ def gamble(bet):
             money += bet
             print(player, "betted", bet, "and brought back", 2*bet)
             print("===============================================================================================")
-            position = id.index(player)
-            amount[position] = money
+            cursor.execute("UPDATE gamble SET amount = %s WHERE ID = %s", (money, player))
         else:
             money -= bet
             print(player, "betted", bet, "and lost", bet)
             print("===============================================================================================")
-            position = id.index(player)
-            amount[position] = money
+            cursor.execute("UPDATE gamble SET amount = %s WHERE ID = %s", (money, player))
     else:
         print("You can not bet more than you own, your current balance is", money)
         print("===============================================================================================")
@@ -65,10 +79,9 @@ def gamble(bet):
         for i in range(3,0,-1):
             print(i)
             time.sleep(1)
-        target = id.index(player)
-        id.pop(target)
-        amount.pop(target)
+        cursor.execute("DELETE FROM gamble WHERE ID = %s", (player,))
         print("*POP* Execution complete.")
+        print("===============================================================================================")
 
 def total():
     global money
@@ -90,9 +103,10 @@ while True:
     elif task == 4:
         total()
     elif task == 5:
-        for i in range(0, len(id)):
-            print("ID -", id[i], " & Amount -", amount[i] )
+        cursor.execute("SELECT * FROM gamble")
+        print(cursor.fetchall())
     elif task == 6:
+        db.commit()
         break
     else:
         print("Invalid input!")
