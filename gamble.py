@@ -48,10 +48,14 @@ def gamble(bet):
             money += bet
             print(player, "betted", bet, "and brought back", 2*bet)
             print("===============================================================================================")
+            position = id.index(player)
+            amount[position] = money
         else:
             money -= bet
             print(player, "betted", bet, "and lost", bet)
             print("===============================================================================================")
+            position = id.index(player)
+            amount[position] = money
     else:
         print("You can not bet more than you own, your current balance is", money)
         print("===============================================================================================")
