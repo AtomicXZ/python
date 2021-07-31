@@ -13,9 +13,9 @@ cursor = db.cursor()
 
 cursor.execute("CREATE DATABASE IF NOT EXISTS python")
 cursor.execute("USE python")
-cursor.execute("CREATE TABLE IF NOT EXISTS hotel (cid INT(3) PRIMARY KEY NOT NULL, name VARCHAR(50), address VARCHAR(255), phoneno INT(10), bill INT(50))")
-cursor.execute("CREATE TABLE IF NOT EXISTS bill (cid INT(3) NOT NULL, item VARCHAR(50), quantity INT(25), price INT(25))")
-cursor.execute("CREATE TABLE IF NOT EXISTS rooms (cid INT(3) NOT NULL, room INT(3), room_price INT(25))")
+cursor.execute("CREATE TABLE IF NOT EXISTS hotel (cid INT PRIMARY KEY NOT NULL, name VARCHAR(50), address VARCHAR(255), phoneno BIGINT, bill BIGINT)")
+cursor.execute("CREATE TABLE IF NOT EXISTS bill (cid INT NOT NULL, item VARCHAR(50), quantity INT, price INT)")
+cursor.execute("CREATE TABLE IF NOT EXISTS rooms (cid INT NOT NULL, room INT, room_price INT)")
 print(
 """██████████████████████████████████████████████████████████████████████████████████████████
 █▄─█▀▀▀█─▄█▄─▄▄─█▄─▄███─▄▄▄─█─▄▄─█▄─▀█▀─▄█▄─▄▄─███─▄─▄─█─▄▄─███─█─█─▄▄─█─▄─▄─█▄─▄▄─█▄─▄███
