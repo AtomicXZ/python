@@ -193,6 +193,7 @@ while True:
     elif task == 5:
         calcbill()
     elif task == 6:
+        calcbill()
         db.commit()
         break
     else:
