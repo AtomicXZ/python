@@ -187,7 +187,7 @@ while True:
     if task == 1:
         new()
     elif task == 2:
-        user()
+        cid = int(input("Please enter your Customer ID:  "))
     elif task == 3:
         book()
     elif task == 4:
