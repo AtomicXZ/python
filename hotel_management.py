@@ -164,8 +164,6 @@ def calcbill():
     l = cursor.fetchall()
     for i in l:
         print(str(i[0])+"\t\t"+str(i[1]))
-        print(type(i[1]))
-        print(type(bill))
         bill += i[1]
 
     cursor.execute("SELECT item, quantity, price FROM bill WHERE cid = %s", (cid,))
