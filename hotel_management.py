@@ -178,6 +178,16 @@ def calcbill():
     print("\nTotal bill - ₹" + str(bill))
     cursor.execute("UPDATE hotel SET bill = %s WHERE cid = %s", (bill, cid))
 
+while True:
+    task = int(input("Please select one of the following\n1. Create a new Customer ID\n2. Enter an existing Customer ID\n=========================>  "))
+    if task == 1:
+        new()
+        break
+    elif task == 2:
+        cid = int(input("Please enter your Customer ID:  "))
+        break
+    else:
+        print("Invalid input!")
 
 while True:
     task = int(input("Enter number corresponding to the preferred task\n1. New Customer\n2. Change Customer ID\n3. Book Room\n4. Order food\n5. Calculate Bill\n6. Exit\n=========================>  "))
