@@ -168,14 +168,14 @@ def calcbill():
 
     cursor.execute("SELECT item, quantity, price FROM bill WHERE cid = %s", (cid,))
     other_commodities =  cursor.fetchall()
-    print("Other commodities:")
+    print("\nOther commodities:")
     for i in other_commodities:
         print("Item name :",i[0])
         print("Quantity :",i[1])
         print("Total price : Rs.",i[2])
         bill += i[2]
 
-    print("\n\nTotal bill - ₹" + str(bill))
+    print("\nTotal bill - ₹" + str(bill))
     cursor.execute("UPDATE hotel SET bill = %s WHERE cid = %s", (bill, cid))
 
 
