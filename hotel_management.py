@@ -29,17 +29,22 @@ def new():
     name = input("Enter your name:  ")
     address = input("Enter your address:  ")
     phoneno = int(input("Enter your phone number:  "))
+    while True:
+        if len(str(phoneno)) != 10:
+            print("Incorrect phone number format, does not contain 10 digits!")
+            phoneno = int(input("Please enter phone number again:  "))
+        else:
+            break
 
     print("**** Generating customer ID for you, please wait ****")
-    cid = random.randint(1,999)
-    cursor.execute("SELECT * FROM hotel WHERE cid = %s", (cid,))
-    record = cursor.fetchall()
-
-    if not record:
-        print("Your Customer ID is", cid)
-        cursor.execute("INSERT INTO hotel VALUES (%s, %s, %s, %s, 0)", (cid, name, address, phoneno))
-    else:
-        new()
+    while True:
+        cid = random.randint(1,999)
+        cursor.execute("SELECT * FROM hotel WHERE cid = %s", (cid,))
+        record = cursor.fetchall()
+        if not record:
+            print("Your Customer ID is", cid)
+            cursor.execute("INSERT INTO hotel VALUES (%s, %s, %s, %s, 0)", (cid, name, address, phoneno))
+            break             
 
 def book():
     choice = int(input("What kind of room would you like to book:  \n1. Standard - ₹3000/night\n2. Deluxe - ₹5000/night\n3. Royal - ₹10000/night\n=========================>  "))
