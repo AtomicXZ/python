@@ -152,9 +152,7 @@ def food():
 
 def calcbill():
 
-    cursor.execute("SELECT bill FROM hotel WHERE cid = %s", (cid,))
-    bill = int(cursor.fetchone()[0])
-
+    bill = 0
     cursor.execute("SELECT cid, name FROM hotel WHERE cid = %s", (cid,))
     i = cursor.fetchone()
     print("You are " + str(i[1]) + " [ ID - " + str(i[0]) + " ] " + "and your bill is:\n")
