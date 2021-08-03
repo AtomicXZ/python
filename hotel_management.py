@@ -96,7 +96,7 @@ def book():
 
 
 def food():
-    choice = int(input("Select the course you'd like to order\n1. Breakfast\n2. Lunch\n3. Supper\n4. Dinner\n5. Beverages\n=========================>  "))
+    choice = int(input("Select the course you'd like to order\n1. Breakfast\n2. Lunch\n3. Supper\n4. Dinner\n5. Beverages\n6. Exit\n=========================>  "))
 
     if choice == 1:
         choice = int(input("What would you like to have for breakfast?\n\n1. Sandwiches - ₹50\n2. Dosa - ₹80\n3. Pav Bhaji - ₹80\n4. Breakfast Thali - ₹200\n=========================>  "))
@@ -140,19 +140,85 @@ def food():
         else:
             print("Invalid choice, redirecting to main ordering page, please order properly this time")
             food()
+    elif choice == 3:
+        choice = int(input("What would you like to have for supper?\n\n1. Hakka Noddles - ₹80\n2. Cheese Sandwiches (2) - ₹50\n3. French Fries - ₹40\n4. Snack Paradise - ₹200\n=========================>  "))
+        if choice == 1:
+            order = "Hakka Noddles"
+            p = 80
+            q = int(input("Enter quantity:  "))
+        elif choice == 2:
+            order = "Cheese Sandwiches"
+            p = 50
+            q = int(input("Enter quantity:  "))
+        elif choice == 3:
+            order = "French Fries"
+            p = 40
+            q = int(input("Enter quantity:  "))
+        elif choice == 4:
+            order = "Snack Paradise"
+            p = 200
+            q = int(input("Enter quantity:  "))
+        else:
+            print("Invalid choice, redirecting to main ordering page, please order properly this time")
+            food()
+    elif choice == 4:
+        choice = int(input("What would you like to have for dinner?\n\n1. Dinner Thali (veg) - ₹200\n2. Dinner Thali (non-veg) - ₹250\n3. Supreme Thali - ₹300\n4. Supreme non-veg Thali - ₹400\n=========================>  "))
+        if choice == 1:
+            order = "Dinner Thali (veg)"
+            p = 200
+            q = int(input("Enter quantity:  "))
+        elif choice == 2:
+            order = "Dinner Thali (non-veg)"
+            p = 250
+            q = int(input("Enter quantity:  "))
+        elif choice == 3:
+            order = "Supreme Thali"
+            p = 300
+            q = int(input("Enter quantity:  "))
+        elif choice == 4:
+            order = "Supreme non-veg Thali"
+            p = 400
+            q = int(input("Enter quantity:  "))
+        else:
+            print("Invalid choice, redirecting to main ordering page, please order properly this time")
+            food()
+    elif choice == 5:
+        choice = int(input("What beverage would you like to have?\n\n1. Cold Drink - ₹40\n2. Mineral Water - ₹20\n3. Milk Shake - ₹60\n4. Smoothie - ₹60\n=========================>  "))
+        if choice == 1:
+            order = "Cold Drink"
+            p = 40
+            q = int(input("Enter quantity:  "))
+        elif choice == 2:
+            order = "Mineral Water"
+            p = 20
+            q = int(input("Enter quantity:  "))
+        elif choice == 3:
+            order = "Milk Shake"
+            p = 60
+            q = int(input("Enter quantity:  "))
+        elif choice == 4:
+            order = "Smoothie"
+            p = 60
+            q = int(input("Enter quantity:  "))
+        else:
+            print("Invalid choice, redirecting to main ordering page, please order properly this time")
+            food()
+    elif choice == 6:
+        print("Returning to main menu.")
     else:
         print("Invalid choice, redirecting to main ordering page, please order properly this time")
         food()
 
-    cursor.execute("SELECT * FROM bill WHERE item = %s AND cid = %s", (order, cid))
-    record = cursor.fetchall()
+    if choice != 6:
+        cursor.execute("SELECT * FROM bill WHERE item = %s AND cid = %s", (order, cid))
+        record = cursor.fetchall()
 
-    if not record:
-        cursor.execute("INSERT INTO bill VALUES (%s, %s, %s, %s)", (cid, order, q, p*q))
-    else:
-        cursor.execute("SELECT quantity FROM bill WHERE item = %s", (order,))
-        q += int(cursor.fetchone()[0])
-        cursor.execute("UPDATE bill SET quantity = %s, price = %s WHERE cid = %s AND item = %s", (q, p*q, cid, order))
+        if not record:
+            cursor.execute("INSERT INTO bill VALUES (%s, %s, %s, %s)", (cid, order, q, p*q))
+        else:
+            cursor.execute("SELECT quantity FROM bill WHERE item = %s", (order,))
+            q += int(cursor.fetchone()[0])
+            cursor.execute("UPDATE bill SET quantity = %s, price = %s WHERE cid = %s AND item = %s", (q, p*q, cid, order))
 
 
 def calcbill():
