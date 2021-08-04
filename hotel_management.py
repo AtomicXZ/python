@@ -254,7 +254,12 @@ while True:
         break
     elif task == 2:
         cid = int(input("Please enter your Customer ID:  "))
-        break
+        cursor.execute("SELECT * FROM hotel WHERE cid = %s", (cid,))
+        record = cursor.fetchall()
+        if not record:
+            print("Customer ID does not exist! Please enter a valid CID.")
+        else:
+            break
     else:
         print("Invalid input!")
 
@@ -264,7 +269,14 @@ while True:
     if task == 1:
         new()
     elif task == 2:
-        cid = int(input("Please enter your Customer ID:  "))
+        while True:
+            cid = int(input("Please enter your Customer ID:  "))
+            cursor.execute("SELECT * FROM hotel WHERE cid = %s", (cid,))
+            record = cursor.fetchall()
+            if not record:
+                print("Customer ID does not exist! Please enter a valid CID.")
+            else:
+                break
     elif task == 3:
         book()
     elif task == 4:
