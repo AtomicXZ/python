@@ -47,7 +47,7 @@ def new():
             break             
 
 def book():
-    choice = int(input("What kind of room would you like to book:  \n1. Standard - ₹3000/night\n2. Deluxe - ₹5000/night\n3. Royal - ₹10000/night\n=========================>  "))
+    choice = int(input("What kind of room would you like to book:  \n1. Standard - ₹3000/night\n2. Deluxe - ₹5000/night\n3. Royal - ₹10000/night\n4. Exit\n=========================>  "))
     if choice == 1:
         noofrooms = int(input("You have chosen Standard room, please enter quantity of rooms:  "))
 
@@ -90,6 +90,8 @@ def book():
                 if not result:
                     break
             cursor.execute("INSERT INTO rooms VALUES (%s, %s, 10000)", (cid, roomno))
+    elif choice == 4:
+        print("Returning to main menu.")
     else:
         print("Invalid choice!")
         book()
